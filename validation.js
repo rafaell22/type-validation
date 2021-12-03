@@ -232,6 +232,19 @@ Schema.prototype.object = function() {
 }
 
 /**
+ * Validates if the value is an HTMLElement.
+ * @return {Schema}   Returns instance of the validation Schema.
+ */
+Schema.prototype.htmlElement = function() {
+    if(
+      this.value instanceof HTMLElement
+    ) {
+        throw new Error('Value is NOT an HTMLElement.');
+    }
+    return this;
+}
+
+/**
  * Function that instantiate the validation Schema
  * @param  {[type]} variable               [description]
  * @return {[type]}          [description]
