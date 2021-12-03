@@ -1,4 +1,13 @@
 /**
+ * Gets the values's raw type (Number, Boolean, String, etc)
+ * @param  {any} value    Value to get the raw type from
+ * @return {string}       The raw type description
+ */
+function toRawType (value) { 
+    return Object.prototype.toString.call(value).slice(8, -1)
+}
+
+/**
  * Schema for variable type validation. Throws error if the validation fails
  * @param {any} value   Value to be validated
  * @constructor
@@ -58,8 +67,7 @@ Schema.prototype.notNull = function() {
 Schema.prototype.function = function() {
     if(
         !this.value ||
-        !this.value.constructor ||
-        this.value.constructor.name !== 'Function'
+        toRawType(this.value) !== 'Function'
     ) {
         throw new Error('Value is NOT a Function.');
     }
@@ -82,7 +90,7 @@ function NumberValidation(value) {
  */
 NumberValidation.prototype.min = function(limit) {
     try {
-        validate(limit).defined().notNull().number();
+        validate(limit).number();
         if(this.value < limit) {
             throw new Error(`Value is less than ${limit}`);
         }
@@ -100,7 +108,7 @@ NumberValidation.prototype.min = function(limit) {
  */
 NumberValidation.prototype.max = function(limit) {
     try {
-        validate(limit).defined().notNull().number();
+        validate(limit).number();
         if(this.value > limit) {
             throw new Error(`Value is more than ${limit}`);
         }
@@ -129,9 +137,8 @@ NumberValidation.prototype.positive = function() {
  */
 Schema.prototype.number = function() {
     try {
-        validate(this.value).defined().notNull();
         if(
-            this.value.constructor.name !== 'Number'
+            toRawType(this.value) !== 'Number'
         ) {
             throw new Error('Value is NOT a Number');
         }
@@ -169,7 +176,7 @@ StringValidation.prototype.notEmpty = function() {
  */
 StringValidation.prototype.maxLength = function(limit) {
     try {
-        validate(limit).defined().notNull().number();
+        validate(limit).number();
         if(this.value.length > limit) {
             throw new Error(`Value's length is more than ${limit}`);
         }
@@ -186,9 +193,8 @@ StringValidation.prototype.maxLength = function(limit) {
  */
 Schema.prototype.string = function() {
     try {
-        validate(this.value).defined().notNull();
         if(
-            this.value.constructor.name !== 'String'
+            toRawType(this.value) !== 'String'
         ) {
             throw new Error('Value is NOT a String');
         }
@@ -208,6 +214,19 @@ Schema.prototype.boolean = function() {
         this.value !== true
     ) {
         throw new Error('Value is NOT a Boolean.');
+    }
+    return this;
+}
+
+/**
+ * Validates if the value is an object.
+ * @return {Schema}   Returns instance of the validation Schema.
+ */
+Schema.prototype.object = function() {
+    if(
+      toRawType(this.value) !== 'Object'
+    ) {
+        throw new Error('Value is NOT an Object.');
     }
     return this;
 }
