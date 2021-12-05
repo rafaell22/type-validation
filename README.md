@@ -59,3 +59,9 @@ Validates if the `string`'s length is less than or equal to the `limit`
 
 ### boolean()
 Validates if the value is a `boolean`
+
+### object()
+Validates if the value is an `object`
+
+### htmlElement()
+Validates if the value is an `HTMLElement`
