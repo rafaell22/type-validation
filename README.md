@@ -63,5 +63,8 @@ Validates if the value is a `boolean`
 ### object()
 Validates if the value is an `object`
 
+### array()
+Validates if the value is an `array`
+
 ### htmlElement()
 Validates if the value is an `HTMLElement`
