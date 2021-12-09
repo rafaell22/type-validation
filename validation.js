@@ -232,6 +232,19 @@ Schema.prototype.object = function() {
 }
 
 /**
+ * Validates if the value is an array.
+ * @return {Schema}   Returns instance of the validation Schema.
+ */
+Schema.prototype.array = function() {
+    if(
+      toRawType(this.value) !== 'Array'
+    ) {
+        throw new Error('Value is NOT an Array.');
+    }
+    return this;
+}
+
+/**
  * Validates if the value is an HTMLElement.
  * @return {Schema}   Returns instance of the validation Schema.
  */
