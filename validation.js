@@ -237,7 +237,7 @@ Schema.prototype.object = function() {
  */
 Schema.prototype.htmlElement = function() {
     if(
-      this.value instanceof HTMLElement
+      !this.value instanceof HTMLElement
     ) {
         throw new Error('Value is NOT an HTMLElement.');
     }
