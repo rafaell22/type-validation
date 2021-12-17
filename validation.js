@@ -66,7 +66,7 @@ Schema.prototype.notNull = function() {
  */
 Schema.prototype.function = function() {
     if(
-        toRawType(this.value) !== 'Function' ||
+        toRawType(this.value) !== 'Function' &&
         toRawType(this.value) !== 'AsyncFunction'
     ) {
         throw new Error('Value is NOT a Function.');
