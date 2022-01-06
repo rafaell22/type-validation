@@ -138,7 +138,8 @@ NumberValidation.prototype.positive = function() {
 Schema.prototype.number = function() {
     try {
         if(
-            toRawType(this.value) !== 'Number'
+            toRawType(this.value) !== 'Number' ||
+            isNaN(this.value)
         ) {
             throw new Error('Value is NOT a Number');
         }
@@ -253,6 +254,19 @@ Schema.prototype.htmlElement = function() {
       !this.value instanceof HTMLElement
     ) {
         throw new Error('Value is NOT an HTMLElement.');
+    }
+    return this;
+}
+
+/**
+ * Validates if the value is one of the allowed values
+ * @return {Schema}   Returns instance of the validation Schema.
+ */
+StringValidation.prototype.values = NumberValidation.prototype.values = Schema.prototype.values = function(...args) {
+    if(
+      !args.some(value => value === this.value)
+    ) {
+        throw new Error('Value is NOT in list of allowed values.');
     }
     return this;
 }
