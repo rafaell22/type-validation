@@ -68,3 +68,6 @@ Validates if the value is an `array`
 
 ### htmlElement()
 Validates if the value is an `HTMLElement`
+
+### values()
+Validates if the value is in a list of values
