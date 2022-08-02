@@ -132,6 +132,22 @@ NumberValidation.prototype.positive = function() {
 }
 
 /**
+ * Validates if number is an integer
+ * @return {NumberValidation}   Returns instance of the validation Schema
+ */
+NumberValidation.prototype.integer = function() {
+    try {
+        if(!Number.isInteger(this.value)) {
+            throw new Error(`Value is not an integer`);
+        }
+        
+        return this;
+    } catch(errorValidatingInteger) {
+        throw errorValidatingInteger;
+    }
+}
+
+/**
  * Validates if the value is a number.
  * @return {Schema}   Returns instance of the validation Schema.
  */
