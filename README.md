@@ -47,6 +47,9 @@ Validates if the `number` is less than or equal to `limit`
 #### number().positive()
 Validates if the `number` is more than 0 (zero)
 
+#### number().integer()
+Validates if the `number` is an integer (no significative decimals)
+
 ### string()
 Validates if the value is a `string`
 
