@@ -187,7 +187,11 @@ NumberValidation.prototype.positive = function() {
 NumberValidation.prototype.integer = function() {
     try {
         if(!Number.isInteger(this.value)) {
-            throw new Error(`Value is not an integer`);
+            throw new ValidationError(
+                'Value is not an integer',
+                'number.integer',
+                this.value
+            );
         }
         
         return this;
@@ -379,9 +383,10 @@ ArrayValidation.prototype.items = function(callback) {
       itemsValidation();
     } catch (errorValidatingItems) {
       throw new ValidationError(
-          errorValidatingItems,
+          'Array items are NOT valid',
           'items',
           this.value,
+          errorValidatingItems
       );
     }
     
